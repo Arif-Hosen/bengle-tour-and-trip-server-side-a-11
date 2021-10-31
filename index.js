@@ -1,6 +1,8 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 const app = express();
+
 const port = process.env.PORT || 5000;
 
 const cors = require('cors');
@@ -27,6 +29,7 @@ async function run() {
 
         const database = client.db('bengleTour');
         const tripCollection = database.collection('trips');
+        const bookingCollection = database.collection('booking');
 
         // GET API
         app.get('/trips', async (req, res) => {
@@ -35,6 +38,43 @@ async function run() {
             res.json(trips);
             // console.log(trips);
         })
+
+        // GET Single Service
+        app.get('/trips/:id', async (req, res) => {
+            const id = req.params.id;
+            // console.log('getting specific service', id);
+            const query = { _id: ObjectId(id) };
+            const trips = await tripCollection.findOne(query);
+            console.log(trips);
+            res.json(trips);
+        })
+
+        // POST API
+        app.post('/booking', async (req, res) => {
+            const customer = req.body;
+            console.log('hit the post api', customer);
+
+            const result = await bookingCollection.insertOne(customer);
+            console.log(result);
+            res.json('result')
+        });
+
+        // GET API
+        app.get('/booking', async (req, res) => {
+            const cursor = bookingCollection.find({});
+            const packages = await cursor.toArray();
+            res.json(packages);
+
+        })
+
+        // DELETE API
+        app.delete('/booking/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await bookingCollection.deleteOne(query);
+            res.json(result);
+        })
+
     }
     finally {
         // await client.close()
