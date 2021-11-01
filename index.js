@@ -45,7 +45,7 @@ async function run() {
             // console.log('getting specific service', id);
             const query = { _id: ObjectId(id) };
             const trips = await tripCollection.findOne(query);
-            console.log(trips);
+
             res.json(trips);
         })
 
@@ -55,8 +55,8 @@ async function run() {
             console.log('hit the post api', customer);
 
             const result = await bookingCollection.insertOne(customer);
-            console.log(result);
-            res.json('result')
+
+            res.json(result)
         });
 
         // GET API
