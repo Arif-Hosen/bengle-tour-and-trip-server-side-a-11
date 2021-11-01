@@ -59,6 +59,16 @@ async function run() {
             res.json(result)
         });
 
+        // POST API to trip collection
+        app.post('/trips', async (req, res) => {
+            const trip = req.body;
+            console.log('hit the post api', trip);
+
+            const result = await tripCollection.insertOne(trip);
+
+            res.json(result)
+        });
+
         // GET API
         app.get('/booking', async (req, res) => {
             const cursor = bookingCollection.find({});
