@@ -1,10 +1,10 @@
 # Bengle Tour and Trip
 
-This project create for assignment-11 purpose. This is a tourism related website, where user can login logout , booking packages, cancel booking. If user is not login they cannot acces booking placement.
+This is a tourism related website, where user can login logout , booking packages, cancel booking. If user is not login they cannot acces booking placement.
 
 ## Live site Link
-[https://frightening-alien-79885.herokuapp.com/]
-You can run server site.
+[https://bengle-tour-and-trip.web.app/]
+You can run  website.
 
 ### Features
 * This is  server side
